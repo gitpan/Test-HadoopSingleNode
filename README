@@ -1,0 +1,47 @@
+NAME
+    Test::HadoopSingleNode - Single node hadoop module for tests.
+
+SYNOPSIS
+      use Test::More;
+      use Test::HadoopSingleNode;
+
+      # Load from $HADOOP_DIR/conf
+      my $hadoop = Test::HadoopSingleNode->new(
+        default_hadoop_conf_dir => "./hadoop_conf",
+      );
+
+      $hadoop->start_all();
+
+      $hadoop->construct_fixture(
+        '/path/to/hdfs/file' => '/path/to/local/file',
+      );
+
+      $hadoop->stop_all();
+
+DESCRIPTION
+    Test::HadoopSingleNode is automatically setups a hadoop instance in a
+    temporary directory, and destroys it when the perl script exits.
+
+FUNCTIONS
+  new
+    Set hadoop configuration. Default configuration is load filed from
+    default_hadoop_conf_dir or $Test::HadoopSingleNode::conf_files, and set
+    make a temporary dir.
+
+  start_all
+    Launch a hadoop instance.
+
+  construct_fixture
+    Put a fixture file to a hdfs.
+
+  stop_all
+    Stop the launched instance.
+
+AUTHOR
+    Test::HadoopSingleNode <ya.yohei@gmail.com>
+
+SEE ALSO
+LICENSE
+    This library is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+

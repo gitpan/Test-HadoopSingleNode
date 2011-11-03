@@ -1,0 +1,43 @@
+---
+abstract: 'Single node hadoop module for tests.'
+author:
+  - 'Test::HadoopSingleNode <ya.yohei@gmail.com>'
+build_requires:
+  ExtUtils::MakeMaker: 6.42
+configure_requires:
+  ExtUtils::MakeMaker: 6.42
+distribution_type: module
+generated_by: 'Module::Install version 1.02'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Test-HadoopSingleNode
+no_index:
+  directory:
+    - inc
+    - t
+    - xt
+requires:
+  Carp: 0
+  Data::Dumper: 0
+  Data::Rmap: 0
+  File::Copy: 0
+  File::Temp: 0
+  File::Which: 0
+  IO::Handle: 0
+  IO::Select: 0
+  IPC::Open3: 0
+  IPC::Open3::Simple: 0
+  IPC::Run: 0
+  Path::Class: 0
+  Proc::Guard: 0
+  Symbol: 0
+  Test::TCP: 0
+  XML::Simple: 0
+  perl: 5.8.0
+resources:
+  homepage: https://github.com/yayohei/p5-Test-HadoopSingleNode/tree
+  license: http://dev.perl.org/licenses/
+  repository: git://github.com/yayohei/p5-Test-HadoopSingleNode.git
+version: 0.02_03
