@@ -126,8 +126,8 @@ sub command {
         $data->{searching} = '';
     } elsif ($command =~ m{item}xms) {
         $paragraph = $parser->interpolate($paragraph, $line_num);
+print  $paragraph, "\n";
         $paragraph =~ s{^\h* \* \h*}{}xms;
-
         if ($data->{searching} eq 'listpara') {
             $data->{searching} = 'listheadhuddled';
         }

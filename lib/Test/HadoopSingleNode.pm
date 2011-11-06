@@ -24,9 +24,9 @@ use Path::Class qw(dir file);
 use File::Copy qw(copy);
 use Data::Dumper;
 
-our $VERSION = '0.02_03';
+our $VERSION = '0.02_04';
 
-# I tested at hadoop-0.20.2-cdh3u1
+# Tested at hadoop-0.20.2-cdh3u1
 our $conf_files = +{
     'core-site.xml' => +{
         property => [
@@ -80,6 +80,10 @@ sub new {
         _RUNNING_TEST_HADOOP => 0,
         _fixture_files => [],
     }, $class;
+    $self->{hadoop_bin} = scalar(which('hadoop'));
+    unless ($self->{hadoop_bin}) {
+        return;
+    }
     $self->{hadoop_conf_dir} = $self->_set_hadoop_conf_dir() || die "conf dir specified";
     $self;
 }
@@ -267,13 +271,13 @@ sub _add_hadoop_opt {
 
 sub __check_alived_hadoop {
     my @process_names = @_;
+    my @pids =();
     if (my $ps = which('ps')) {
         my $cmd =
               ($^O =~ /linux/i)  ? qq|$ps -n -o "%p %a"|     # linux
             : ($^O =~ /darwin/i) ? qq|$ps -Ao "pid command"| # osx
             : '';
         return unless $cmd;
-        my @pids;
         my $regex = (@process_names)
             ? '(' . join('|', map { $_ =~ s/\./\\./go; $_; } @process_names) . ')'
             : '';
@@ -283,8 +287,8 @@ sub __check_alived_hadoop {
                 push @pids, $1;
             }
         }
-        return @pids;
     }
+    return @pids;
 }
 
 sub __replace_data {

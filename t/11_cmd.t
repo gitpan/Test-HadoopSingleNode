@@ -15,7 +15,8 @@ my @tests = (
     { command => [ 'perl', '-e', qq{print 'a' x ($length ** 2); print STDERR 'b' x ($length ** 2)} ], out => 'a' x ($length ** 2), err => 'b' x ($length ** 2), code => 0 },
 );
 
-my $hadoop = Test::HadoopSingleNode->new();
+my $hadoop = Test::HadoopSingleNode->new()
+    or plan skip_all => 'not found hadoop bin';
 
 for my $test (@tests) {
     my $retcode = $hadoop->cmd(@{$test->{command}});

@@ -10,7 +10,9 @@ use Test::HadoopSingleNode;
 
 my $hadoop = Test::HadoopSingleNode->new(
     default_hadoop_conf_dir => file(__FILE__)->parent->subdir('default_conf'),
-);
+) or plan skip_all => 'not found hadoop bin';
+
+diag Dumper $hadoop;
 
 $hadoop->start_all();
 
